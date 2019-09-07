@@ -10,18 +10,18 @@ var LinkedList = function() {                   // LinkedList is a function
       list.head = newNode;                      // it will assign a node (with a value property ) as the head
     };
 
-    list.head.next = newNode;                   // assigns a new node to the next 'space' (list.tail.next = newNode works as well, but this makes more sense to me)
-
+    list.head.next = newNode;                   // assigns a new node so the next 'space' can reference/point to it
     list.tail = newNode;                        // assign a new node to the list's tail
 
-  };
+  };  // TC for addToTail is constant O(1). We're not iterating through other nodes to add a new node
 
   list.removeHead = function() {
+    var oldHead = list.head;                    // create a variable to store the old head so that we can return it's value later
 
-    list.head = list.head.next;                 // assigns the current head node to the next property that is pointing to the next node object
-    return list.head.value;                     // returns the value of the former head
+    list.head = list.head.next;                 // assigns the current head node to the next property that is pointing to the next node object and makes that one the next head node
+    return oldHead.value;                       // returns the value of the former head
 
-  };
+  };  // TC for removeHead is constant O(1). We're only removing one head node at a time. No iterations needed
 
   list.contains = function(target) {
 
@@ -36,7 +36,8 @@ var LinkedList = function() {                   // LinkedList is a function
   };
 
   return list;
-};
+
+};  // TC is linear O(n) because in order to check for target value, we must iterate through each node once
 
 var Node = function(value) {                    // Node is a class aka factory that takes in a value
   var node = {};                                // then creates a node object
