@@ -25,7 +25,7 @@ treeMethods.contains = function(target) {                       // takes a targe
     }
 
     for (var i = 0; i < this.children.length; i++) {            // loop through the length of the children array
-    if (this.children[i].contains(target)) {                    // if, during recursion through the children array's elements, equals target input
+      if (this.children[i].contains(target)) {                  // if, during recursion through the children array's elements, equals target input
       return true;                                              // return true
     }
   }
