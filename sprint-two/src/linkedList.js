@@ -8,10 +8,12 @@ var LinkedList = function() {                   // LinkedList is a function
 
     if (!list.head) {                           // if the list object does not have a head node
       list.head = newNode;                      // it will assign a node (with a value property ) as the head
-    };
+      list.tail = newNode;                      // it will assign a node (with a value property ) as the tail
+    } else {
+      list.tail.next = newNode;                 // assigns a new node so the next 'space' can reference/point to it
+      list.tail = newNode;                      // assign a new node to the list's tail
+    }
 
-    list.head.next = newNode;                   // assigns a new node so the next 'space' can reference/point to it
-    list.tail = newNode;                        // assign a new node to the list's tail
 
   };  // TC for addToTail is constant O(1). We're not iterating through other nodes to add a new node
 
@@ -24,15 +26,15 @@ var LinkedList = function() {                   // LinkedList is a function
   };  // TC for removeHead is constant O(1). We're only removing one head node at a time. No iterations needed
 
   list.contains = function(target) {
-
-    while (list.head) {                         // while we are in the head node
-      if (list.head.value === target) {         // if the value in the head node is equal to the target argument
-        return true;                            // returns true that it contains the target that was added
-      } else if (list.head.value !== target) {
-        list.head = list.head.next;             // move onto the next node
+    var currentNode = list.head;                  // assign the currentNode to the list.head
+    while (currentNode) {                         // while currentNode exists
+      if (currentNode.value === target) {         // if the value in the current Node is equal to the target argument
+        return true;                              // returns true that it contains the target that was added
+      } else if (currentNode.value !== target) {  // if the value at the currentNode ISN'T the target
+        currentNode = currentNode.next;           // point the currentNode to the next currentNode
       }
     }
-    return false;                               // else returns false
+    return false;                                 // else returns false
   };
 
   return list;
